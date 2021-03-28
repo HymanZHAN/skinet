@@ -1,4 +1,4 @@
-namespace API.Entities
+namespace Core.Entities
 {
     public class Product
     {
@@ -6,5 +6,3 @@ namespace API.Entities
         public string Name { get; set; }
     }
 }
-
- 
