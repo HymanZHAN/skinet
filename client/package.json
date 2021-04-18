@@ -6,7 +6,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "cross-env NODE_ENV=development ng serve",
+    "start": "cross-env NODE_ENV=development ng serve --hmr",
     "build": "cross-env NODE_ENV=production ng build"
   },
   "private": true,
