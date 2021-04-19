@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IPaginatedProducts, IProduct } from './models/product';
+import { IPaginatedProducts, IProduct } from './shared/models/product';
 
 @Component({
   selector: 'app-root',
