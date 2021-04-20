@@ -7,24 +7,6 @@ import { IPaginatedProducts, IProduct } from './shared/models/product';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Skinet';
-  products: IProduct[] = [];
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.http
-      .get<IPaginatedProducts>(
-        'https://localhost:5001/api/products?pageSize=50'
-      )
-      .subscribe(
-        (response) => {
-          this.products = response.data;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-  }
 }
