@@ -2,14 +2,73 @@
 <div
   class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
 >
-  <div class="row-span-4 pt-5 flex-grow flex flex-col bg-white">
+  <div
+    class="row-span-4 py-5 flex-grow flex flex-col bg-white rounded-lg shadow-md"
+  >
     <nav class="flex-1 px-2 space-y-8" aria-label="Sidebar">
       <div class="space-y-1">
         <h3
           class="px-3 mb-1 text-sm font-semibold text-indigo-700 uppercase tracking-wider"
           id="projects-headline"
         >
-          Projects
+          Sort
+        </h3>
+        <div
+          class="space-y-1 flex flex-row"
+          role="group"
+          aria-labelledby="projects-headline"
+        >
+          <select
+            id="location"
+            name="location"
+            class="flex-1 mx-3 my-2 block w-auto pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option>Name: A to Z</option>
+            <option selected>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="space-y-1">
+        <h3
+          class="px-3 mb-1 text-sm font-semibold text-indigo-700 uppercase tracking-wider"
+          id="projects-headline"
+        >
+          Brands
+        </h3>
+        <div class="space-y-1" role="group" aria-labelledby="projects-headline">
+          <a
+            href="#"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+          >
+            <span class="truncate"> Website redesign </span>
+          </a>
+          <a
+            href="#"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+          >
+            <span class="truncate"> GraphQL API </span>
+          </a>
+          <a
+            href="#"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+          >
+            <span class="truncate"> Customer migration guides </span>
+          </a>
+          <a
+            href="#"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+          >
+            <span class="truncate"> Profit sharing program </span>
+          </a>
+        </div>
+      </div>
+      <div class="space-y-1">
+        <h3
+          class="px-3 mb-1 text-sm font-semibold text-indigo-700 uppercase tracking-wider"
+          id="projects-headline"
+        >
+          Types
         </h3>
         <div class="space-y-1" role="group" aria-labelledby="projects-headline">
           <a
@@ -44,13 +103,44 @@
     </nav>
   </div>
 
-  <header class="col-start-2 sm:col-span-1 md:col-span-2 lg:col-span-3">
+  <header class="col-start-2 sm:col-span-1 md:col-span-1 lg:col-span-2 flex items-center">
     <p>Showing <strong>10</strong> of <strong>16</strong> products</p>
   </header>
 
+  <div class="max-w-lg w-full lg:max-w-xs">
+    <label for="search" class="sr-only">Search</label>
+    <div class="relative text-gray-400 focus-within:text-gray-500">
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+      >
+        <svg
+          class="h-5 w-5"
+          x-description="Heroicon name: solid/search"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+      <input
+        id="search"
+        class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 focus:placeholder-gray-500 sm:text-sm"
+        placeholder="Search"
+        type="search"
+        name="search"
+      />
+    </div>
+  </div>
+
   <ul class="col-start-2 row-start-2">
     <li
-      class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"
+      class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow-md divide-y divide-gray-200"
     >
       <div class="flex-1 flex flex-col p-8">
         <img
