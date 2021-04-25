@@ -1,4 +1,6 @@
 {
+  "css.validate": false,
+  "scss.validate": false,
   "cSpell.words": ["Skinet"],
   "[javascript]": {
     "editor.defaultFormatter": "dprint.dprint"

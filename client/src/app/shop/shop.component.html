@@ -14,13 +14,17 @@
         </h3>
         <div class="space-y-1 flex flex-row" role="group" aria-labelledby="projects-headline">
           <select
-            id="location"
-            name="location"
+            id="sort"
+            name="sort"
+            (change)="onSortSelected($event)"
             class="flex-1 mx-3 my-2 block w-auto pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
-            <option>Name: A to Z</option>
-            <option selected>Price: Low to High</option>
-            <option>Price: High to Low</option>
+            <option
+              *ngFor="let sort of sortOptions"
+              [value]="sort.value"
+            >
+              {{ sort.name }}
+            </option>
           </select>
         </div>
       </div>
@@ -32,13 +36,15 @@
           Brands
         </h3>
         <div class="space-y-1" role="group" aria-labelledby="projects-headline">
-          <a
+          <li
             *ngFor="let brand of brands"
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+            [class.active]="brandIdSelected === brand.id"
+            [value]="brand.id"
+            (click)="onBrandSelected(brand.id)"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 cursor-pointer"
           >
             <span class="truncate"> {{ brand.name }} </span>
-          </a>
+          </li>
         </div>
       </div>
       <div class="space-y-1">
@@ -49,13 +55,16 @@
           Types
         </h3>
         <div class="space-y-1" role="group" aria-labelledby="projects-headline">
-          <a
+          <li
             *ngFor="let type of types"
+            [class.active]="typeIdSelected === type.id"
+            [value]="type.id"
+            (click)="onTypeSelected(type.id)"
             href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 cursor-pointer"
           >
             <span class="truncate"> {{ type.name }}</span>
-          </a>
+          </li>
         </div>
       </div>
     </nav>
@@ -64,7 +73,10 @@
   <div class="placeholder-transparent"></div>
 
   <div class="col-start-2 sm:col-span-1 md:col-span-1 lg:col-span-2 flex items-center">
-    <p>Showing <strong>6</strong> of <strong>16</strong> products</p>
+    <p>
+      Showing <strong>{{ shownProductCount }}</strong> of
+      <strong>{{ totalProductCount }}</strong> products
+    </p>
   </div>
 
   <div class="max-w-lg w-full lg:max-w-xs">
@@ -100,13 +112,7 @@
     class="col-start-2 row-start-2 col-span-3 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
   >
     <app-product-item *ngFor="let product of products" [product]="product"></app-product-item>
-    <!-- <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item>
-    <app-product-item></app-product-item> -->
   </ul>
+
+  <app-pagination class="col-start-2 col-span-3"></app-pagination>
 </div>
