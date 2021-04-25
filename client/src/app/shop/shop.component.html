@@ -1,11 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div
-  class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
->
-  <div
-    class="row-span-4 py-5 flex-grow flex flex-col bg-white rounded-lg shadow-md"
-  >
-    <nav class="flex-1 px-2 space-y-8" aria-label="Sidebar">
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <div class="row-start-2 row-span-1">
+    <nav
+      class="px-2 py-5 space-y-8 sticky top-24 bg-white rounded-lg shadow-md"
+      aria-label="Sidebar"
+    >
       <div class="space-y-1">
         <h3
           class="px-3 mb-1 text-sm font-semibold text-indigo-700 uppercase tracking-wider"
@@ -13,11 +12,7 @@
         >
           Sort
         </h3>
-        <div
-          class="space-y-1 flex flex-row"
-          role="group"
-          aria-labelledby="projects-headline"
-        >
+        <div class="space-y-1 flex flex-row" role="group" aria-labelledby="projects-headline">
           <select
             id="location"
             name="location"
@@ -38,28 +33,11 @@
         </h3>
         <div class="space-y-1" role="group" aria-labelledby="projects-headline">
           <a
+            *ngFor="let brand of brands"
             href="#"
             class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
           >
-            <span class="truncate"> Website redesign </span>
-          </a>
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> GraphQL API </span>
-          </a>
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> Customer migration guides </span>
-          </a>
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> Profit sharing program </span>
+            <span class="truncate"> {{ brand.name }} </span>
           </a>
         </div>
       </div>
@@ -72,47 +50,27 @@
         </h3>
         <div class="space-y-1" role="group" aria-labelledby="projects-headline">
           <a
+            *ngFor="let type of types"
             href="#"
             class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
           >
-            <span class="truncate"> Website redesign </span>
-          </a>
-
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> GraphQL API </span>
-          </a>
-
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> Customer migration guides </span>
-          </a>
-
-          <a
-            href="#"
-            class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-          >
-            <span class="truncate"> Profit sharing program </span>
+            <span class="truncate"> {{ type.name }}</span>
           </a>
         </div>
       </div>
     </nav>
   </div>
 
-  <header class="col-start-2 sm:col-span-1 md:col-span-1 lg:col-span-2 flex items-center">
-    <p>Showing <strong>10</strong> of <strong>16</strong> products</p>
-  </header>
+  <div class="placeholder-transparent"></div>
+
+  <div class="col-start-2 sm:col-span-1 md:col-span-1 lg:col-span-2 flex items-center">
+    <p>Showing <strong>6</strong> of <strong>16</strong> products</p>
+  </div>
 
   <div class="max-w-lg w-full lg:max-w-xs">
     <label for="search" class="sr-only">Search</label>
     <div class="relative text-gray-400 focus-within:text-gray-500">
-      <div
-        class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
-      >
+      <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
         <svg
           class="h-5 w-5"
           x-description="Heroicon name: solid/search"
@@ -138,78 +96,17 @@
     </div>
   </div>
 
-  <ul class="col-start-2 row-start-2">
-    <li
-      class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow-md divide-y divide-gray-200"
-    >
-      <div class="flex-1 flex flex-col p-8">
-        <img
-          class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=21K6jyBcMm&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-          alt=""
-        />
-        <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper</h3>
-        <dl class="mt-1 flex-grow flex flex-col justify-between">
-          <dt class="sr-only">Title</dt>
-          <dd class="text-gray-500 text-sm">Paradigm Representative</dd>
-          <dt class="sr-only">Role</dt>
-          <dd class="mt-3">
-            <span
-              class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full"
-              >Admin</span
-            >
-          </dd>
-        </dl>
-      </div>
-      <div>
-        <div class="-mt-px flex divide-x divide-gray-200">
-          <div class="w-0 flex-1 flex">
-            <a
-              href="mailto:janecooper@example.com"
-              class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
-            >
-              <!-- Heroicon name: solid/mail -->
-              <svg
-                class="w-5 h-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-                />
-                <path
-                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-                />
-              </svg>
-              <span class="ml-3">Email</span>
-            </a>
-          </div>
-          <div class="-ml-px w-0 flex-1 flex">
-            <a
-              href="tel:+1-202-555-0170"
-              class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
-            >
-              <!-- Heroicon name: solid/phone -->
-              <svg
-                class="w-5 h-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
-                />
-              </svg>
-              <span class="ml-3">Call</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </li>
-
-    <!-- More people... -->
+  <ul
+    class="col-start-2 row-start-2 col-span-3 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+  >
+    <app-product-item *ngFor="let product of products" [product]="product"></app-product-item>
+    <!-- <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item>
+    <app-product-item></app-product-item> -->
   </ul>
 </div>

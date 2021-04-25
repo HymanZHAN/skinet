@@ -1,0 +1,19 @@
+{
+  "$schema": "https://dprint.dev/schemas/v0.json",
+  "projectType": "educational",
+  "incremental": true,
+  "includes": ["**/*.{html,scss,ts}"],
+  "excludes": ["**/node_modules", "**/*-lock.json", "**/dist"],
+  "plugins": [
+    "https://plugins.dprint.dev/prettier-0.2.2.exe-plugin@63b06beba3acd51e6d23379c47db342a1a24f3d88f3c52a775e2db3426124582"
+  ],
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "printWidth": 100,
+    "semi": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "singleQuote": true
+  }
+}
