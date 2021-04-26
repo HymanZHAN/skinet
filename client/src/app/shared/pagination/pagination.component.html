@@ -15,9 +15,10 @@
   </div>
   <div>
     <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-      <a
-        href="#"
-        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+      <li
+        (click)="goToPrevPage()"
+        [class.disabled]="isOnFirstPage"
+        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer"
       >
         <span class="sr-only">Previous</span>
         <!-- Heroicon name: solid/chevron-left -->
@@ -34,51 +35,21 @@
             clip-rule="evenodd"
           />
         </svg>
-      </a>
-      <a
-        href="#"
-        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+      </li>
+
+      <li
+        *ngFor="let page of pages"
+        [class.active]="page === pageIndex"
+        (click)="selectPage(page)"
+        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer"
       >
-        1
-      </a>
-      <a
-        href="#"
-        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-      >
-        2
-      </a>
-      <a
-        href="#"
-        class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-      >
-        3
-      </a>
-      <span
-        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
-      >
-        ...
-      </span>
-      <a
-        href="#"
-        class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-      >
-        8
-      </a>
-      <a
-        href="#"
-        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-      >
-        9
-      </a>
-      <a
-        href="#"
-        class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-      >
-        10
-      </a>
-      <a
-        href="#"
-        class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+        {{ page }}
+      </li>
+
+      <li
+        (click)="goToNextPage()"
+        [class.disabled]="isOnLastPage"
+        class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer"
       >
         <span class="sr-only">Next</span>
         <!-- Heroicon name: solid/chevron-right -->
@@ -95,8 +66,7 @@
             clip-rule="evenodd"
           />
         </svg>
-      </a>
+      </li>
     </nav>
   </div>
-  <!-- </div> -->
 </div>

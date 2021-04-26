@@ -1,0 +1,21 @@
+<div class="flex items-center">
+  <p *ngIf="totalCount > 0">
+    Showing
+    <strong>{{ (pageIndex - 1) * pageSize + 1 }}</strong>
+    -
+    <ng-container *ngIf="totalCount < pageSize * pageIndex; else elseTemplate">
+      <strong>
+        {{ totalCount }}
+      </strong>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <strong>
+        {{ pageIndex * pageSize }}
+      </strong>
+    </ng-template>
+    of
+    <strong>{{ totalCount }}</strong>
+    products
+  </p>
+  <p *ngIf="totalCount === 0">There are <strong>0</strong> results.</p>
+</div>

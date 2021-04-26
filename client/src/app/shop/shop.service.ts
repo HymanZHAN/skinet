@@ -6,6 +6,7 @@ import { IProductType } from '../shared/models/product-type.model';
 import { IPaginatedProducts, IProduct } from '../shared/models/product.model';
 
 import { map } from 'rxjs/operators';
+import { ProductParams } from '../shared/models/product-params.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,17 +18,20 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(brandId?: number, typeId?: number, sort?: string) {
+  getProducts(productParams: ProductParams) {
     let params = new HttpParams();
-    if (brandId) {
-      params = params.set('brandId', brandId.toString());
+    if (productParams.brandId) {
+      params = params.set('brandId', productParams.brandId.toString());
     }
-    if (typeId) {
-      params = params.set('typeId', typeId.toString());
+    if (productParams.typeId) {
+      params = params.set('typeId', productParams.typeId.toString());
     }
-    if (sort) {
-      params = params.set('sort', sort);
+    if (productParams.search) {
+      params = params.set('search', productParams.search.toString());
     }
+    params = params.set('sort', productParams.sort);
+    params = params.set('pageIndex', productParams.pageIndex.toString());
+    params = params.set('pageSize', productParams.pageSize.toString());
 
     return this.http.get<IPaginatedProducts>(this.baseUrl + 'products', {
       // observe: 'response',

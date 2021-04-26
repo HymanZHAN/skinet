@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IProductBrand } from '../shared/models/product-brand.model';
 import { IProductType } from '../shared/models/product-type.model';
 import { IProductSort } from '../shared/models/product-sort.model';
 import { IProduct } from '../shared/models/product.model';
 import { ShopService } from './shop.service';
+import { ProductParams } from '../shared/models/product-params.model';
 
 @Component({
   selector: 'app-shop',
@@ -14,17 +15,16 @@ export class ShopComponent implements OnInit {
   products: IProduct[] = [];
   totalProductCount = 0;
   shownProductCount = 0;
-  brands: IProductBrand[] = [];
-  brandIdSelected = 0;
-  types: IProductType[] = [];
-  typeIdSelected = 0;
 
+  productParams = new ProductParams();
+
+  brands: IProductBrand[] = [];
+  types: IProductType[] = [];
   sortOptions: IProductSort[] = [
     { name: 'Name: A to Z', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
-  sortSelected = this.sortOptions[0].name;
 
   constructor(private shopService: ShopService) {}
 
@@ -32,25 +32,21 @@ export class ShopComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getTypes();
-
-    console.log('brands:', this.brands);
   }
 
   private getProducts() {
-    console.log(this.brandIdSelected);
-    this.shopService
-      .getProducts(this.brandIdSelected, this.typeIdSelected, this.sortSelected)
-      .subscribe(
-        (resp) => {
-          this.products = resp.data;
-          this.shownProductCount = resp.count <= resp.pageSize ? resp.count : resp.pageSize;
-          this.totalProductCount = resp.count;
-          console.log(resp);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    this.shopService.getProducts(this.productParams).subscribe(
+      (resp) => {
+        this.products = resp.data;
+        this.shownProductCount = resp.count <= resp.pageSize ? resp.count : resp.pageSize;
+        this.totalProductCount = resp.count;
+        this.productParams.pageIndex = resp.pageIndex;
+        this.productParams.pageSize = resp.pageSize;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   private getBrands() {
@@ -76,18 +72,40 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    this.brandIdSelected = brandId;
+    this.productParams.brandId = brandId;
+    this.productParams.pageIndex = 1;
     this.getProducts();
   }
 
   onTypeSelected(typeId: number) {
-    this.typeIdSelected = typeId;
+    this.productParams.typeId = typeId;
+    this.productParams.pageIndex = 1;
     this.getProducts();
   }
 
   onSortSelected(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.sortSelected = target.value;
+    this.productParams.sort = target.value;
     this.getProducts();
+  }
+
+  onPageChanged(newPageIndex: number) {
+    this.productParams.pageIndex = newPageIndex;
+    this.getProducts();
+  }
+
+  onSearch() {
+    this.getProducts();
+  }
+
+  onReset() {
+    this.productParams.search = '';
+    this.getProducts();
+  }
+
+  onSearchBoxFocusOut() {
+    if (!this.productParams.search) {
+      this.getProducts();
+    }
   }
 }
