@@ -9,6 +9,9 @@ module.exports = {
         88: "22rem",
         92: "23rem",
       },
+      fontFamily: {
+        'brand':'Reenie Beanie'
+      }
     },
   },
   variants: {

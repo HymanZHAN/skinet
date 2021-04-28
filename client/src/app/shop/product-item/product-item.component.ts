@@ -6,10 +6,8 @@ import { EMPTY_PRODUCT, IProduct } from 'src/app/shared/models/product.model';
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.scss'],
 })
-export class ProductItemComponent implements OnInit {
+export class ProductItemComponent {
   @Input() product: IProduct = EMPTY_PRODUCT;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

@@ -1,0 +1,51 @@
+<div *ngIf="product" class="grid grid-cols-4">
+  <div class="col-span-2">
+    <img
+      class="bg-white w-3/4 m-auto rounded-md shadow-xl"
+      src="{{ product.pictureUrl }}"
+      alt="{{ product.name }}"
+    />
+  </div>
+
+  <div class="col-start-3 col-span-2">
+    <h3 class="text-3xl pb-4 border-b-2">{{ product.name }}</h3>
+    <p class="mt-4 px-2 py-1 text-green-800 font-medium bg-green-100 rounded-full inline-block">
+      {{ product.price | currency }}
+    </p>
+    <div class="flex mt-4 items-center">
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="#4f46e5"
+          viewBox="0 0 24 24"
+          stroke="white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span class="text-lg px-2">2</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="#4f46e5"
+          viewBox="0 0 24 24"
+          stroke="white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </div>
+      <button class="ml-8 p-2 border rounded-md text-white bg-indigo-600">Add to Cart</button>
+    </div>
+    <div class="mt-5">{{ product.description }}</div>
+  </div>
+</div>

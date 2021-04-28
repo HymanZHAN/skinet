@@ -7,7 +7,7 @@
       src="{{ product.pictureUrl }}"
       alt="{{ product.name }}"
     />
-    <a href="#">
+    <a routerLink="/shop/{{ product.id }}">
       <h3 class="sr-only">Product Name</h3>
       <h3 class="mt-6 text-gray-900 text-sm font-medium truncate" title="{{ product.name }}">
         {{ product.name }}
@@ -50,6 +50,7 @@
       <div class="-ml-px w-0 flex-1 flex">
         <a
           href="#"
+          routerLink="/shop/{{ product.id }}"
           class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
         >
           <!-- Heroicon name: solid/phone -->
