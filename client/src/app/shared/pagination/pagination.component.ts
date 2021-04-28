@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -13,7 +6,7 @@ import {
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   @Input()
   public set totalCount(value: number) {
     if (value >= 0) {
@@ -48,8 +41,6 @@ export class PaginationComponent implements OnInit {
   pageCount: number = 0;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   selectPage(pageIndex: number) {
     this.pageSelected.emit(pageIndex);
