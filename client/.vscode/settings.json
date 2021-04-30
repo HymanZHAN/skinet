@@ -1,7 +1,10 @@
 {
   "css.validate": false,
   "scss.validate": false,
-  "cSpell.words": ["Skinet"],
+  "cSpell.words": [
+    "Skinet",
+    "ngneat"
+  ],
   "[javascript]": {
     "editor.defaultFormatter": "dprint.dprint"
   },

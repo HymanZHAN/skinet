@@ -1,0 +1,27 @@
+<div class="container space-y-2">
+  <h4 class="text-xl">
+    Internal Server Error - refreshing the page will make the exception disappear
+  </h4>
+  <ng-container *ngIf="error">
+    <h5 class="text-red-600">Error: {{ error.message }}</h5>
+    <p class="text-sm text-gray-400">Note: Angular is probably not responsible</p>
+    <p>What to do next?</p>
+    <ol class="list-decimal">
+      <li class="list-inside ml-4">Open your browser's dev tool</li>
+      <li class="list-inside ml-4">Inspect the network tab</li>
+      <li class="list-inside ml-4">Check the failing request</li>
+      <li class="list-inside ml-4">Examine this request URL - make sure this is correct</li>
+      <li class="list-inside ml-4">
+        Reproduce the error in Postman - if we get the same response in Postman, then the issue is
+        NOT with Angular
+      </li>
+    </ol>
+
+    <p>Following is the stack trace - this is where your investigation should start!</p>
+    <pre>
+      <code class="mt-8 text-sm text-pink-600" style="background-color: whitesmoke">
+        {{ error.details }}
+      </code>
+    </pre>
+  </ng-container>
+</div>
