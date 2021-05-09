@@ -1,19 +1,14 @@
 <div class="min-h-screen bg-gray-100">
   <app-navbar></app-navbar>
-
-  <div class="py-10">
-    <!-- <header>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">Welcome to {{ title }}!</h1>
-      </div>
-    </header> -->
+  <div class="py-4">
     <main>
+      <ngx-spinner><h3>Loading...</h3></ngx-spinner>
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <app-section-header></app-section-header>
         <!-- Replace with your content -->
         <div class="px-4 py-8 sm:px-0">
           <router-outlet></router-outlet>
         </div>
-        <!-- /End replace -->
       </div>
     </main>
   </div>

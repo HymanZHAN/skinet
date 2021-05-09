@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-  <div class="row-start-2 row-span-1">
+  <div *ngIf="types.length > 0 && brands.length > 0" class="row-start-2 row-span-1">
     <nav
       class="px-2 py-5 space-y-8 sticky top-24 bg-white rounded-lg shadow-md"
       aria-label="Sidebar"
@@ -76,7 +76,7 @@
     class="col-start-2 sm:col-span-1 md:col-span-1 lg:col-span-2 flex"
   ></app-pagination-header>
 
-  <div class="max-w-lg w-full lg:max-w-xs">
+  <div *ngIf="products.length > 0" class="max-w-lg w-full lg:max-w-xs">
     <label for="search" class="sr-only">Search</label>
     <div class="relative text-gray-400 focus-within:text-gray-500">
       <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
