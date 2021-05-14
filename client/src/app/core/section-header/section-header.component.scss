@@ -1,0 +1,12 @@
+.xng-breadcrumb-root {
+  display: inline;
+  border-radius: 0%;
+}
+
+label.xng-breadcrumb-trail {
+  @apply text-indigo-700;
+}
+
+.xng-breadcrumb-separator {
+  padding: 0 0;
+}
