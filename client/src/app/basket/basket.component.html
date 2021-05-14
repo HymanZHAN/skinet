@@ -1,0 +1,10 @@
+<ng-container *ngIf="!(basketCount$ | async) as basketCount">
+  <div>
+    <p>There are no items in your basket.</p>
+  </div>
+</ng-container>
+<ng-container *ngIf="basket$ | async as basket">
+  <ul>
+    <li *ngFor="let item of basket.items">{{ item.productName }} - {{ item.quantity }}</li>
+  </ul>
+</ng-container>

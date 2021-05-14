@@ -26,11 +26,12 @@
     "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "xng-breadcrumb": "^6.7.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.8",
+    "@angular-devkit/build-angular": "^0.1102.12",
     "@angular-eslint/builder": "4.0.0",
     "@angular-eslint/eslint-plugin": "4.0.0",
     "@angular-eslint/eslint-plugin-template": "4.0.0",
@@ -42,6 +43,7 @@
     "@tailwindcss/typography": "^0.4.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
     "cross-env": "^7.0.3",

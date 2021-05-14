@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+// import { registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,11 +12,12 @@ import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-import en from '@angular/common/locales/en';
+// import { NZ_I18N } from 'ng-zorro-antd/i18n';
+// import { en_US } from 'ng-zorro-antd/i18n';
+// import en from '@angular/common/locales/en';
+import { BasketModule } from './basket/basket.module';
 
-registerLocaleData(en);
+// registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ registerLocaleData(en);
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
+    BasketModule,
   ],
   providers: [
     {
@@ -41,7 +43,7 @@ registerLocaleData(en);
       useClass: LoadingInterceptor,
       multi: true,
     },
-    { provide: NZ_I18N, useValue: en_US },
+    // { provide: NZ_I18N, useValue: en_US },
   ],
   bootstrap: [AppComponent],
   exports: [],

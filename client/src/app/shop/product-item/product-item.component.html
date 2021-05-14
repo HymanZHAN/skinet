@@ -25,8 +25,8 @@
   <div>
     <div class="-mt-px flex divide-x divide-gray-200">
       <div class="w-0 flex-1 flex">
-        <a
-          href="#"
+        <button
+          (click)="addItemToBasket()"
           class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
         >
           <!-- Heroicon name: outline/shopping-bag -->
@@ -45,7 +45,7 @@
             />
           </svg>
           <span class="ml-3">Shop</span>
-        </a>
+        </button>
       </div>
       <div class="-ml-px w-0 flex-1 flex">
         <a
