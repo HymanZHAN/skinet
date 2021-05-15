@@ -13,14 +13,38 @@ export class BasketService {
   baseUrl = environment.apiUrl;
   private basketSource = new BehaviorSubject<IBasket>(new Basket());
   basket$ = this.basketSource.asObservable();
+  basketItemCount$ = this.basket$.pipe(map((basket) => this.calculateBasketItemCount(basket)));
+  orderSubtotal$ = this.basket$.pipe(map((basket) => this.calculateOrderSubtotal(basket)));
+  orderShippingFee$ = this.basket$.pipe(map((basket) => this.calculateOrderShippingFee(basket)));
+  orderTotal$ = this.basket$.pipe(map((basket) => this.calculateOrderTotal(basket)));
 
   constructor(private http: HttpClient) {}
+
+  calculateBasketItemCount(basket: IBasket) {
+    return basket.items.length === 0
+      ? 0
+      : basket.items.map((item) => item.quantity).reduce((a, b) => a + b);
+  }
+
+  calculateOrderSubtotal(basket: IBasket) {
+    console.log(basket.items);
+    return basket.items.length === 0
+      ? 0
+      : basket.items.map((item) => item.quantity * item.price).reduce((a, b) => a + b);
+  }
+
+  calculateOrderShippingFee(basket: IBasket) {
+    return 0;
+  }
+
+  calculateOrderTotal(basket: IBasket) {
+    return this.calculateOrderShippingFee(basket) + this.calculateOrderSubtotal(basket);
+  }
 
   getBasket(id: string) {
     return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket) => {
         this.basketSource.next(basket);
-        console.log(basket);
       })
     );
   }

@@ -18,7 +18,7 @@ export class NavbarComponent {
 
   constructor(private basketService: BasketService) {
     this.basket$ = this.basketService.basket$;
-    this.basketCount$ = this.basket$.pipe(map((basket) => basket.items.length));
+    this.basketCount$ = basketService.basketItemCount$;
   }
 
   toggleMenuOpen() {
