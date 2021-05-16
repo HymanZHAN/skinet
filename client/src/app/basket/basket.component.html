@@ -59,14 +59,21 @@
                     {{ item.price | currency }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    {{ item.quantity }}
+                    <app-quantity-count
+                      [count]="item.quantity"
+                      (incremented)="incrementItemCount(item)"
+                      (decremented)="decrementItemCount(item)"
+                    ></app-quantity-count>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     {{ item.quantity * item.price | currency }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <span class="sr-only">Delete</span>
-                    <div class="text-red-700 hover:text-red-500 cursor-pointer">
+                    <div
+                      class="text-red-700 hover:text-red-500 cursor-pointer"
+                      (click)="removeItem(item)"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-6 w-6"

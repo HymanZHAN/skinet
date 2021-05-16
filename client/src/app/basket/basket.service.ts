@@ -14,6 +14,7 @@ export class BasketService {
   private basketSource = new BehaviorSubject<IBasket>(new Basket());
   basket$ = this.basketSource.asObservable();
   basketItemCount$ = this.basket$.pipe(map((basket) => this.calculateBasketItemCount(basket)));
+
   orderSubtotal$ = this.basket$.pipe(map((basket) => this.calculateOrderSubtotal(basket)));
   orderShippingFee$ = this.basket$.pipe(map((basket) => this.calculateOrderShippingFee(basket)));
   orderTotal$ = this.basket$.pipe(map((basket) => this.calculateOrderTotal(basket)));
@@ -27,7 +28,6 @@ export class BasketService {
   }
 
   calculateOrderSubtotal(basket: IBasket) {
-    console.log(basket.items);
     return basket.items.length === 0
       ? 0
       : basket.items.map((item) => item.quantity * item.price).reduce((a, b) => a + b);
@@ -61,13 +61,33 @@ export class BasketService {
 
   addItemToBasket(item: IProduct, quantity = 1) {
     const itemToAdd: IBasketItem = mapProductItemToBasketItem(item, quantity);
-    const basket = this.currentBasket;
+    const basket = this.basketSource.value;
     localStorage.setItem('basketId', basket.id);
-    basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
+    basket.items = this.addOrUpdateItems(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }
 
-  private addOrUpdateItem(
+  incrementBasketItem(item: IBasketItem) {
+    const basket = this.basketSource.value;
+    basket.items = this.addOrUpdateItems(basket.items, item, 1);
+    this.setBasket(basket);
+  }
+
+  decrementBasketItem(item: IBasketItem) {
+    if (item.quantity > 1) {
+      const basket = this.basketSource.value;
+      basket.items = this.addOrUpdateItems(basket.items, item, -1);
+      this.setBasket(basket);
+    }
+  }
+
+  removeBasketItem(item: IBasketItem) {
+    const basket = this.basketSource.value;
+    basket.items = basket.items.filter((t) => t.id !== item.id);
+    this.setBasket(basket);
+  }
+
+  private addOrUpdateItems(
     items: IBasketItem[],
     itemToAdd: IBasketItem,
     quantity: number
@@ -83,7 +103,7 @@ export class BasketService {
   }
 }
 
-function mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
+export function mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
   return {
     id: item.id,
     productName: item.name,

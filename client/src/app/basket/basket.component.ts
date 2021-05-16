@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { IBasket } from '../shared/models/basket';
+import { IBasket, IBasketItem } from '../shared/models/basket';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -23,5 +22,17 @@ export class BasketComponent {
     this.orderSubtotal$ = this.basketService.orderSubtotal$;
     this.orderShippingFee$ = this.basketService.orderShippingFee$;
     this.orderTotal$ = this.basketService.orderTotal$;
+  }
+
+  incrementItemCount(item: IBasketItem) {
+    this.basketService.incrementBasketItem(item);
+  }
+
+  decrementItemCount(item: IBasketItem) {
+    this.basketService.decrementBasketItem(item);
+  }
+
+  removeItem(item: IBasketItem) {
+    this.basketService.removeBasketItem(item);
   }
 }

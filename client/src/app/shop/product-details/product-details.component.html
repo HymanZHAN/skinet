@@ -13,38 +13,17 @@
       {{ product.price | currency }}
     </p>
     <div class="flex mt-4 items-center">
-      <div class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="#4f46e5"
-          viewBox="0 0 24 24"
-          stroke="white"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span class="text-lg px-2">2</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="#4f46e5"
-          viewBox="0 0 24 24"
-          stroke="white"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </div>
-      <button class="ml-8 p-2 border rounded-md text-white bg-indigo-600">Add to Cart</button>
+      <app-quantity-count
+        [count]="productCount"
+        (incremented)="incrementQuantity()"
+        (decremented)="decrementQuantity()"
+      ></app-quantity-count>
+      <button
+        (click)="addProductsToBasket()"
+        class="ml-8 p-2 border rounded-md text-white bg-indigo-600"
+      >
+        Add to Cart
+      </button>
     </div>
     <div class="mt-5">{{ product.description }}</div>
   </div>

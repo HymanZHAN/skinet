@@ -16,6 +16,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 // import { en_US } from 'ng-zorro-antd/i18n';
 // import en from '@angular/common/locales/en';
 import { BasketModule } from './basket/basket.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 // registerLocaleData(en);
 
@@ -31,6 +32,7 @@ import { BasketModule } from './basket/basket.module';
     BrowserAnimationsModule,
     FormsModule,
     BasketModule,
+    CheckoutModule,
   ],
   providers: [
     {
