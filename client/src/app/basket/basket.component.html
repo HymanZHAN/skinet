@@ -43,8 +43,8 @@
             </thead>
             <tbody>
               <!-- Odd row -->
-              <ng-container *ngFor="let item of basket.items; let i = index">
-                <tr [ngClass]="{ 'bg-white': i % 2 === 0, 'bg-gray-50': i % 2 !== 0 }">
+              <ng-container *ngFor="let item of basket.items; let odd = odd; let even = even">
+                <tr [ngClass]="{ 'bg-white': even, 'bg-gray-50': odd }">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <div class="flex items-center">
                       <div class="flex-shrink-0 h-12 w-12">
