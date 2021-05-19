@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { BasketService } from 'src/app/basket/basket.service';
 import { EMPTY_PRODUCT, IProduct } from 'src/app/shared/models/product.model';
 
@@ -6,6 +6,7 @@ import { EMPTY_PRODUCT, IProduct } from 'src/app/shared/models/product.model';
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItemComponent {
   @Input() product: IProduct = EMPTY_PRODUCT;

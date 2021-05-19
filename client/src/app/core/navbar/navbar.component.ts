@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket } from 'src/app/shared/models/basket';
 
@@ -8,6 +7,7 @@ import { IBasket } from 'src/app/shared/models/basket';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   isMobileMenuOpen = false;

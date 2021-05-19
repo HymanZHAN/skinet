@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IProductBrand } from '../shared/models/product-brand.model';
 import { IProductType } from '../shared/models/product-type.model';
 import { IProductSort } from '../shared/models/product-sort.model';
@@ -10,6 +10,7 @@ import { ProductParams } from '../shared/models/product-params.model';
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopComponent implements OnInit {
   products: IProduct[] = [];
@@ -26,7 +27,7 @@ export class ShopComponent implements OnInit {
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -42,6 +43,7 @@ export class ShopComponent implements OnInit {
         this.totalProductCount = resp.count;
         this.productParams.pageIndex = resp.pageIndex;
         this.productParams.pageSize = resp.pageSize;
+        this.ref.markForCheck();
       },
       (error) => {
         console.error(error);
@@ -53,6 +55,7 @@ export class ShopComponent implements OnInit {
     this.shopService.getBrands().subscribe(
       (resp) => {
         this.brands = [{ id: 0, name: 'All' }, ...resp];
+        this.ref.markForCheck();
       },
       (error) => {
         console.error(error);
@@ -64,6 +67,7 @@ export class ShopComponent implements OnInit {
     this.shopService.getTypes().subscribe(
       (resp) => {
         this.types = [{ id: 0, name: 'All' }, ...resp];
+        this.ref.markForCheck();
       },
       (error) => {
         console.error(error);
@@ -107,5 +111,9 @@ export class ShopComponent implements OnInit {
     if (!this.productParams.search) {
       this.getProducts();
     }
+  }
+
+  trackByProductId(index: number, product: IProduct) {
+    return product.id;
   }
 }
