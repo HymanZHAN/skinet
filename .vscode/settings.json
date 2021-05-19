@@ -8,5 +8,8 @@
     "**/bin": true,
     "**/obj": true
   },
-  "terminal.integrated.shell.linux": "/usr/bin/pwsh"
+  "terminal.integrated.shell.linux": "/usr/bin/pwsh",
+  "cSpell.words": [
+    "skinet"
+  ]
 }
