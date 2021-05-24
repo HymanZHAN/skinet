@@ -23,7 +23,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     BreadcrumbModule,
     HotToastModule.forRoot({
       dismissible: true,
-      position: 'bottom-center',
+      position: 'top-center',
     }),
   ],
   exports: [NavbarComponent, HotToastModule, SectionHeaderComponent],

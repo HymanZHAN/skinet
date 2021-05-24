@@ -1,11 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgModule } from '@angular/core';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
-import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { QuantityCountComponent } from './quantity-count/quantity-count.component';
-import { RouterModule } from '@angular/router';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -13,14 +17,17 @@ import { RouterModule } from '@angular/router';
     PaginationHeaderComponent,
     OrderTotalsComponent,
     QuantityCountComponent,
+    TextInputComponent,
   ],
-  imports: [CommonModule, NzCarouselModule, RouterModule],
+  imports: [CommonModule, NzCarouselModule, RouterModule, ReactiveFormsModule, FontAwesomeModule],
   exports: [
     PaginationComponent,
     PaginationHeaderComponent,
     NzCarouselModule,
     OrderTotalsComponent,
     QuantityCountComponent,
+    ReactiveFormsModule,
+    TextInputComponent,
   ],
 })
 export class SharedModule {}

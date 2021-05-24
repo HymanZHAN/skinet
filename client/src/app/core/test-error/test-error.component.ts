@@ -8,13 +8,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./test-error.component.scss'],
 })
 export class TestErrorComponent {
-  baseUrl = environment.apiUrl + 'buggy/';
+  baseUrl = `${environment.apiUrl}/buggy`;
   validationErrors: unknown[] = [];
 
   constructor(private http: HttpClient) {}
 
   get404Error() {
-    this.http.get(this.baseUrl + 'notfound').subscribe(
+    this.http.get(`${this.baseUrl}/notfound`).subscribe(
       (resp) => {
         console.log(resp);
       },
@@ -25,7 +25,7 @@ export class TestErrorComponent {
   }
 
   get400ValidationError() {
-    this.http.get(this.baseUrl + 'badrequest/fortytwo').subscribe(
+    this.http.get(`${this.baseUrl}/badrequest/fortytwo`).subscribe(
       (resp) => {
         console.log(resp);
       },
@@ -37,7 +37,7 @@ export class TestErrorComponent {
   }
 
   get400Error() {
-    this.http.get(this.baseUrl + 'badrequest').subscribe(
+    this.http.get(`${this.baseUrl}/badrequest`).subscribe(
       (resp) => {
         console.log(resp);
       },
@@ -48,7 +48,7 @@ export class TestErrorComponent {
   }
 
   get500Error() {
-    this.http.get(this.baseUrl + 'servererror').subscribe(
+    this.http.get(`${this.baseUrl}/servererror`).subscribe(
       (resp) => {
         console.log(resp);
       },

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Basket, IBasket, IBasketItem } from '../shared/models/basket';
+import { Basket, IBasket, IBasketItem } from '../shared/models/basket.model';
 import { IProduct } from '../shared/models/product.model';
 
 @Injectable({
@@ -42,7 +42,7 @@ export class BasketService {
   }
 
   getBasket(id: string) {
-    return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
+    return this.http.get<IBasket>(`${this.baseUrl}/basket?id=${id}`).pipe(
       map((basket) => {
         this.basketSource.next(basket);
       })
@@ -50,7 +50,7 @@ export class BasketService {
   }
 
   setBasket(basket: IBasket) {
-    return this.http.post<IBasket>(this.baseUrl + 'basket', basket).subscribe((newBasket) => {
+    return this.http.post<IBasket>(`${this.baseUrl}/basket`, basket).subscribe((newBasket) => {
       this.basketSource.next(newBasket);
     });
   }

@@ -3,6 +3,9 @@
   "scss.validate": false,
   "cSpell.words": [
     "Skinet",
+    "badrequest",
+    "emailexists",
+    "fortytwo",
     "ngneat"
   ],
   "[javascript]": {

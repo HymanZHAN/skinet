@@ -7,12 +7,13 @@ import { IPaginatedProducts, IProduct } from '../shared/models/product.model';
 
 import { map } from 'rxjs/operators';
 import { ProductParams } from '../shared/models/product-params.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
 
   products$ = new BehaviorSubject<IProduct[]>([]);
 
@@ -33,7 +34,7 @@ export class ShopService {
     params = params.set('pageIndex', productParams.pageIndex.toString());
     params = params.set('pageSize', productParams.pageSize.toString());
 
-    return this.http.get<IPaginatedProducts>(this.baseUrl + 'products', {
+    return this.http.get<IPaginatedProducts>(`${this.baseUrl}/products`, {
       // observe: 'response',
       params,
     });
@@ -41,13 +42,13 @@ export class ShopService {
   }
 
   getProduct(id: number) {
-    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
+    return this.http.get<IProduct>(`${this.baseUrl}/products/${id}`);
   }
 
   getBrands() {
-    return this.http.get<IProductBrand[]>(this.baseUrl + 'products/brands');
+    return this.http.get<IProductBrand[]>(`${this.baseUrl}/products/brands`);
   }
   getTypes() {
-    return this.http.get<IProductType[]>(this.baseUrl + 'products/types');
+    return this.http.get<IProductType[]>(`${this.baseUrl}/products/types`);
   }
 }

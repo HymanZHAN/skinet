@@ -17,6 +17,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 // import en from '@angular/common/locales/en';
 import { BasketModule } from './basket/basket.module';
 import { CheckoutModule } from './checkout/checkout.module';
+import { AccountModule } from './account/account.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // registerLocaleData(en);
 
@@ -33,6 +35,8 @@ import { CheckoutModule } from './checkout/checkout.module';
     FormsModule,
     BasketModule,
     CheckoutModule,
+    AccountModule,
+    FontAwesomeModule,
   ],
   providers: [
     {
