@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Data
 {
@@ -35,8 +37,25 @@ namespace Infrastructure.Data
 
                     foreach (var property in properties)
                     {
-                        modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                        modelBuilder
+                            .Entity(entityType.Name)
+                            .Property(property.Name)
+                            .HasConversion<double>();
                     }
+
+                    var datetimeProperties = entityType
+                        .ClrType
+                        .GetProperties()
+                        .Where(p => p.PropertyType == typeof(DateTimeOffset));
+
+                    foreach (var property in datetimeProperties)
+                    {
+                        modelBuilder
+                            .Entity(entityType.Name)
+                            .Property(property.Name)
+                            .HasConversion(new DateTimeOffsetToBinaryConverter());
+                    }
+
                 }
             }
         }
