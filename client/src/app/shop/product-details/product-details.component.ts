@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { BasketService } from 'src/app/basket/basket.service';
-import { IBasket, IBasketItem } from 'src/app/shared/models/basket.model';
-import { EMPTY_PRODUCT, IProduct } from 'src/app/shared/models/product.model';
+import { IProduct } from 'src/app/shared/models/product.model';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { ShopService } from '../shop.service';
 

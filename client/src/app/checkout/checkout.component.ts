@@ -27,9 +27,9 @@ export class CheckoutComponent implements OnInit {
   ) {
     this.checkoutForm = this.createCheckoutForm();
     this.getAddressFormValues();
-    this.route.queryParams.subscribe((params) => {
-      this.step = params['initialStep'] ? +params['initialStep'] : 0;
-    });
+
+    const initialStep = this.route.snapshot.queryParamMap.get('step') ?? 0;
+    this.step = +initialStep;
   }
 
   ngOnInit(): void {

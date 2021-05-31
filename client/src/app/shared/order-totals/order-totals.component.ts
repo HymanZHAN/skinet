@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CheckoutService } from 'src/app/checkout/checkout.service';
 import { IOrderSummary } from '../models/order.model';
 
 @Component({
@@ -10,12 +9,9 @@ import { IOrderSummary } from '../models/order.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderTotalsComponent {
+  @Input() orderSummary$!: Observable<IOrderSummary>;
   @Input() nextButtonLink = '/checkout';
   @Input() nextButtonText = 'Continue to checkout';
 
-  orderSummary$: Observable<IOrderSummary>;
-
-  constructor(private checkoutService: CheckoutService) {
-    this.orderSummary$ = this.checkoutService.orderSummary$;
-  }
+  constructor() {}
 }

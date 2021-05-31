@@ -20,6 +20,7 @@ import { CheckoutModule } from './checkout/checkout.module';
 import { AccountModule } from './account/account.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { OrderModule } from './order/order.module';
 
 // registerLocaleData(en);
 
@@ -38,6 +39,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     CheckoutModule,
     AccountModule,
     FontAwesomeModule,
+    OrderModule,
   ],
   providers: [
     {

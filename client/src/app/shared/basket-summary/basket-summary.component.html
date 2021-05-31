@@ -1,7 +1,5 @@
-<ng-container
-  *ngIf="(basketCount$ | async) === 0 || (basketCount$ | async) === null; else elseTemplate"
->
-  <div>
+<ng-container *ngIf="products$ | async as products; else elseTemplate">
+  <div *ngIf="products.length === 0; else elseTemplate">
     <p>There are no items in your basket.</p>
   </div>
 </ng-container>
@@ -44,10 +42,7 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Odd row -->
-              <ng-container
-                *ngFor="let item of (basket$ | async)?.items; let odd = odd; let even = even"
-              >
+              <ng-container *ngFor="let item of products$ | async; let odd = odd; let even = even">
                 <tr [ngClass]="{ 'bg-white': even, 'bg-gray-50': odd }">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <div class="flex items-center">

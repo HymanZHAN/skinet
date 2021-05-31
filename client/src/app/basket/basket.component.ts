@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CheckoutService } from '../checkout/checkout.service';
 import { IBasket, IBasketItem } from '../shared/models/basket.model';
+import { IOrderSummary } from '../shared/models/order.model';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -10,9 +12,13 @@ import { BasketService } from './basket.service';
 })
 export class BasketComponent {
   basketCount$: Observable<number>;
+  basketItems$: Observable<IBasketItem[]>;
+  orderSummary$: Observable<IOrderSummary>;
 
-  constructor(private basketService: BasketService) {
+  constructor(private basketService: BasketService, private checkoutService: CheckoutService) {
     this.basketCount$ = this.basketService.basketItemCount$;
+    this.basketItems$ = this.basketService.basketItems$;
+    this.orderSummary$ = this.checkoutService.orderSummary$;
   }
 
   incrementItemCount(item: IBasketItem) {

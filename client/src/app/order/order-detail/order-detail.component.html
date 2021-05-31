@@ -1,0 +1,11 @@
+<div class="grid grid-cols-3 grid-rows-2">
+  <div class="col-span-2 pr-8">
+    <app-basket-summary [readonly]="true" [items$]="orderItems$"></app-basket-summary>
+  </div>
+  <app-order-totals
+    [orderSummary$]="orderSummary$"
+    [nextButtonLink]="'/orders'"
+    [nextButtonText]="'Go back to orders'"
+    class="col-start-3"
+  ></app-order-totals>
+</div>

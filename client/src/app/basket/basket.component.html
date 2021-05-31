@@ -1,8 +1,9 @@
 <app-basket-summary
+  [items$]="basketItems$"
   (decremented)="decrementItemCount($event)"
   (incremented)="incrementItemCount($event)"
   (removed)="removeItem($event)"
 ></app-basket-summary>
 <div class="flex justify-end mt-6" *ngIf="(basketCount$ | async) !== 0">
-  <app-order-totals class="w-1/2"></app-order-totals>
+  <app-order-totals [orderSummary$]="orderSummary$" class="w-1/2"></app-order-totals>
 </div>
