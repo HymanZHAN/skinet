@@ -1,6 +1,6 @@
 <div class="grid grid-cols-3 grid-rows-2">
   <div class="col-span-2 pr-8">
-    <app-stepper [linearModeSelected]="false" #appStepper>
+    <app-stepper [linearModeSelected]="false" [initialStep]="step" #appStepper>
       <cdk-step [label]="'Address'" [completed]="checkoutForm.get('addressForm')?.valid">
         <app-checkout-address [checkoutForm]="checkoutForm"></app-checkout-address>
       </cdk-step>
@@ -15,5 +15,9 @@
       </cdk-step>
     </app-stepper>
   </div>
-  <app-order-totals class="col-start-3"></app-order-totals>
+  <app-order-totals
+    [nextButtonLink]="'/basket'"
+    [nextButtonText]="'Go back to basket'"
+    class="col-start-3"
+  ></app-order-totals>
 </div>

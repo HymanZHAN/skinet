@@ -6,6 +6,7 @@ import { AccountService } from '../account/account.service';
 import { CheckoutService } from './checkout.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IAddressFormValue } from '../shared/models/address.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -16,15 +17,21 @@ import { IAddressFormValue } from '../shared/models/address.model';
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   addressChangedSub: Subscription | undefined = Subscription.EMPTY;
+  step: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private route: ActivatedRoute
   ) {
     this.checkoutForm = this.createCheckoutForm();
     this.getAddressFormValues();
+    this.route.queryParams.subscribe((params) => {
+      this.step = params['initialStep'] ? +params['initialStep'] : 0;
+    });
   }
+
   ngOnInit(): void {
     this.checkoutForm
       .get('addressForm')

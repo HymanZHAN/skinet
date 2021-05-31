@@ -10,6 +10,9 @@ import { IOrderSummary } from '../models/order.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderTotalsComponent {
+  @Input() nextButtonLink = '/checkout';
+  @Input() nextButtonText = 'Continue to checkout';
+
   orderSummary$: Observable<IOrderSummary>;
 
   constructor(private checkoutService: CheckoutService) {

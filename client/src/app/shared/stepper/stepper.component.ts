@@ -9,9 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StepperComponent extends CdkStepper implements OnInit {
   @Input() linearModeSelected: boolean = false;
+  @Input() initialStep = 0;
 
   ngOnInit(): void {
     this.linear = this.linearModeSelected;
+    this.goToStep(this.initialStep);
   }
 
   goToStep(index: number) {
