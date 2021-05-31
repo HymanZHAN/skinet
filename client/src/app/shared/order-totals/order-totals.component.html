@@ -12,23 +12,21 @@
       <li class="py-4">
         <div class="flex items-center justify-between space-x-4">
           <span>Order Subtotal:</span>
-          {{ orderSubtotal | currency }}
+          {{ (orderSummary$ | async)?.orderSubtotal | currency }}
         </div>
       </li>
 
       <li class="py-4">
         <div class="flex items-center justify-between space-x-4">
           <span>Shipping Fee:</span>
-
-          {{ orderShippingFee | currency }}
+          {{ (orderSummary$ | async)?.orderShippingFee | currency }}
         </div>
       </li>
 
       <li class="py-4">
         <div class="flex items-center justify-between space-x-4">
           <span>Order Total:</span>
-
-          {{ orderTotal | currency }}
+          {{ (orderSummary$ | async)?.orderTotal | currency }}
         </div>
       </li>
     </ul>

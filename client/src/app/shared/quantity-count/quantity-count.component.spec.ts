@@ -8,9 +8,8 @@ describe('QuantityCountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuantityCountComponent ]
-    })
-    .compileComponents();
+      declarations: [QuantityCountComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

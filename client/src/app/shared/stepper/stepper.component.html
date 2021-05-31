@@ -1,0 +1,27 @@
+<nav aria-label="Progress">
+  <ol class="space-y-4 md:flex md:space-y-0 md:space-x-8">
+    <li
+      *ngFor="let step of steps; let i = index; let last = last; let first = first"
+      class="step-element cursor-pointer"
+      [ngClass]="{ 'cursor-default': i === selectedIndex }"
+      (click)="goToStep(i)"
+    >
+      <a
+        [ngClass]="{
+          completed: step.completed,
+          current: i === selectedIndex,
+          upcoming: i !== selectedIndex && !step.completed
+        }"
+      >
+        <span class="step-label">
+          {{ step.label }}
+        </span>
+        <span class="text-sm font-medium"></span>
+      </a>
+    </li>
+  </ol>
+</nav>
+
+<div class="pt-4">
+  <ng-container [ngTemplateOutlet]="selected?.content || null"></ng-container>
+</div>

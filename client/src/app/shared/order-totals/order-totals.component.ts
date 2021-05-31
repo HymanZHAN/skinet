@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CheckoutService } from 'src/app/checkout/checkout.service';
+import { IOrderSummary } from '../models/order.model';
 
 @Component({
   selector: 'app-order-totals',
@@ -7,9 +10,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderTotalsComponent {
-  @Input() orderSubtotal: number | null = 0;
-  @Input() orderShippingFee: number | null = 0;
-  @Input() orderTotal: number | null = 0;
+  orderSummary$: Observable<IOrderSummary>;
 
-  constructor() {}
+  constructor(private checkoutService: CheckoutService) {
+    this.orderSummary$ = this.checkoutService.orderSummary$;
+  }
 }

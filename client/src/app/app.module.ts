@@ -19,6 +19,7 @@ import { BasketModule } from './basket/basket.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { AccountModule } from './account/account.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 // registerLocaleData(en);
 
@@ -47,6 +48,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true,
     },
     // { provide: NZ_I18N, useValue: en_US },

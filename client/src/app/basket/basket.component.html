@@ -1,10 +1,9 @@
-<ng-container *ngIf="!(basketCount$ | async) as basketCount">
+<!-- <ng-container *ngIf="(basketCount$ | async) === (0 || null)">
   <div>
     <p>There are no items in your basket.</p>
   </div>
 </ng-container>
 <ng-container *ngIf="basket$ | async as basket">
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -42,7 +41,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Odd row -->
               <ng-container *ngFor="let item of basket.items; let odd = odd; let even = even">
                 <tr [ngClass]="{ 'bg-white': even, 'bg-gray-50': odd }">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -97,13 +95,13 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end mt-6">
-      <app-order-totals
-        class="w-1/2"
-        [orderSubtotal]="orderSubtotal$ | async"
-        [orderShippingFee]="orderShippingFee$ | async"
-        [orderTotal]="orderTotal$ | async"
-      ></app-order-totals>
-    </div>
   </div>
-</ng-container>
+</ng-container> -->
+<app-basket-summary
+  (decremented)="decrementItemCount($event)"
+  (incremented)="incrementItemCount($event)"
+  (removed)="removeItem($event)"
+></app-basket-summary>
+<div class="flex justify-end mt-6" *ngIf="(basketCount$ | async) !== 0">
+  <app-order-totals class="w-1/2"></app-order-totals>
+</div>

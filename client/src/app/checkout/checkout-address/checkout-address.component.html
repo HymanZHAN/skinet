@@ -1,0 +1,34 @@
+<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+  <div class="flex justify-between items-center">
+    <h4>Shipping Address</h4>
+    <app-button
+      (click)="saveUserAddress()"
+      [disabled]="
+        !checkoutForm.get('addressForm')?.valid || !checkoutForm.get('addressForm')?.dirty
+      "
+      class="text-xs"
+    >
+      Save as default address</app-button
+    >
+  </div>
+  <div formGroupName="addressForm" class="flex flex-wrap">
+    <div class="pr-4 pt-4 w-1/2">
+      <app-text-input [label]="'First Name'" formControlName="firstName"></app-text-input>
+    </div>
+    <div class="pt-4 w-1/2">
+      <app-text-input [label]="'Last Name'" formControlName="lastName"></app-text-input>
+    </div>
+    <div class="pr-4 pt-4 w-1/2">
+      <app-text-input [label]="'Street'" formControlName="street"></app-text-input>
+    </div>
+    <div class="pt-4 w-1/2">
+      <app-text-input [label]="'City'" formControlName="city"></app-text-input>
+    </div>
+    <div class="pr-4 pt-4 w-1/2">
+      <app-text-input [label]="'State'" formControlName="state"></app-text-input>
+    </div>
+    <div class="pt-4 w-1/2">
+      <app-text-input [label]="'Zip Code'" formControlName="zipCode"></app-text-input>
+    </div>
+  </div>
+</div>

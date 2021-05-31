@@ -1,0 +1,57 @@
+<div class="mt-4" [formGroup]="checkoutForm">
+  <div formGroupName="deliveryForm" class="flex flex-wrap">
+    <fieldset>
+      <legend class="sr-only">Delivery pricing</legend>
+      <div class="relative bg-white rounded-md -space-y-px">
+        <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
+        <label
+          *ngFor="let method of deliveryMethods$ | async; let first = first; let last = last"
+          (click)="setDeliveryMethod(method)"
+          class="border-gray-200 relative border p-4 flex flex-col cursor-pointer md:pl-4 md:pr-6 md:grid md:grid-cols-3"
+          [ngClass]="{
+            'rounded-t-md': first,
+            'rounded-b-md': last,
+            'bg-indigo-50 border-indigo-200 z-10':
+              (selectedDeliveryMethod$ | async)?.id === method.id
+          }"
+        >
+          <div class="flex items-center text-sm">
+            <input
+              formControlName="deliveryMethod"
+              value="{{ method.id }}"
+              type="radio"
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+              aria-labelledby="pricing-plans-0-label"
+              aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1"
+            />
+            <span id="pricing-plans-0-label" class="ml-3 font-medium text-gray-900">
+              {{ method.shortName }}
+            </span>
+          </div>
+          <p
+            id="pricing-plans-0-description-0"
+            class="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
+          >
+            <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
+            <span
+              class="text-gray-900 font-medium"
+              [ngClass]="{
+                'text-indigo-900': (selectedDeliveryMethod$ | async)?.id === method.id
+              }"
+            >
+              {{ method.price | currency }}
+            </span>
+          </p>
+          <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
+          <p
+            id="pricing-plans-0-description-1"
+            class="text-gray-500 ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
+            [ngClass]="{ 'text-indigo-700': (selectedDeliveryMethod$ | async)?.id === method.id }"
+          >
+            {{ method.description }}
+          </p>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+</div>

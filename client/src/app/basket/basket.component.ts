@@ -9,19 +9,10 @@ import { BasketService } from './basket.service';
   styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent {
-  basket$: Observable<IBasket>;
   basketCount$: Observable<number>;
-  orderSubtotal$: Observable<number>;
-  orderShippingFee$: Observable<number>;
-  orderTotal$: Observable<number>;
 
   constructor(private basketService: BasketService) {
-    this.basket$ = this.basketService.basket$;
     this.basketCount$ = this.basketService.basketItemCount$;
-
-    this.orderSubtotal$ = this.basketService.orderSubtotal$;
-    this.orderShippingFee$ = this.basketService.orderShippingFee$;
-    this.orderTotal$ = this.basketService.orderTotal$;
   }
 
   incrementItemCount(item: IBasketItem) {
