@@ -46,8 +46,9 @@ export class BasketSummaryComponent implements OnInit {
   }
 
   toProductListItem(item: IOrderItem | IBasketItem) {
+    const productId = 'productId' in item ? item.productId : item.id;
     return {
-      id: item.id,
+      id: productId,
       pictureUrl: item.pictureUrl,
       price: item.price,
       productName: item.productName,

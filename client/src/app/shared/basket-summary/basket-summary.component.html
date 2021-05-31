@@ -46,7 +46,10 @@
                 <tr [ngClass]="{ 'bg-white': even, 'bg-gray-50': odd }">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <div class="flex items-center">
-                      <div class="flex-shrink-0 h-12 w-12">
+                      <div
+                        class="flex-shrink-0 h-12 w-12 cursor-pointer"
+                        routerLink="/shop/{{ item.id }}"
+                      >
                         <img class="h-12 w-12" src="{{ item.pictureUrl }}" alt="" />
                       </div>
                       <div class="ml-4">
