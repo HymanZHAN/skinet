@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AccountService } from '../account/account.service';
 import { CheckoutService } from './checkout.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IAddressFormValue } from '../shared/models/address.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IOrderSummary } from '../shared/models/order.model';
 
 @UntilDestroy()
 @Component({
@@ -18,6 +19,7 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   addressChangedSub: Subscription | undefined = Subscription.EMPTY;
   step: number = 0;
+  orderSummary$: Observable<IOrderSummary>;
 
   constructor(
     private fb: FormBuilder,
@@ -26,9 +28,11 @@ export class CheckoutComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.checkoutForm = this.createCheckoutForm();
+    this.orderSummary$ = this.checkoutService.orderSummary$;
+
     this.getAddressFormValues();
 
-    const initialStep = this.route.snapshot.queryParamMap.get('step') ?? 0;
+    const initialStep = this.route.snapshot.queryParamMap.get('step') ?? '0';
     this.step = +initialStep;
   }
 

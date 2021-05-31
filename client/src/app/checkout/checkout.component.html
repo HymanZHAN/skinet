@@ -16,6 +16,7 @@
     </app-stepper>
   </div>
   <app-order-totals
+    [orderSummary$]="orderSummary$"
     [nextButtonLink]="'/basket'"
     [nextButtonText]="'Go back to basket'"
     class="col-start-3"

@@ -3,7 +3,7 @@
     class="bg-gray-50 px-6 pt-5 pb-4 rounded-t-md text-sm font-medium text-gray-500 border-b border-gray-200"
   >
     <h3 class="uppercase flex items-center">Order Summary</h3>
-    <p class="text-xs italic mt-2 text-gray-400">
+    <p *ngIf="showHints" class="text-xs italic mt-2 text-gray-400">
       *Shipping costs will be added depending on the choices made during checkout.
     </p>
   </div>

@@ -3,6 +3,7 @@
     <app-basket-summary [readonly]="true" [items$]="orderItems$"></app-basket-summary>
   </div>
   <app-order-totals
+    [showHints]="false"
     [orderSummary$]="orderSummary$"
     [nextButtonLink]="'/orders'"
     [nextButtonText]="'Go back to orders'"
