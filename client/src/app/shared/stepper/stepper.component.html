@@ -2,9 +2,9 @@
   <ol class="space-y-4 md:flex md:space-y-0 md:space-x-8">
     <li
       *ngFor="let step of steps; let i = index; let last = last; let first = first"
-      class="step-element cursor-pointer"
-      [ngClass]="{ 'cursor-default': i === selectedIndex }"
-      (click)="goToStep(i)"
+      class="step-element"
+      [ngClass]="{ 'cursor-pointer': step.completed }"
+      (click)="goToStep(i, step)"
     >
       <a
         [ngClass]="{

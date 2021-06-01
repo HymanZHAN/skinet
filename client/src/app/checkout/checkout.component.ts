@@ -8,6 +8,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IAddressFormValue } from '../shared/models/address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IOrderSummary } from '../shared/models/order.model';
+import { IDeliveryMethod } from '../shared/models/delivery-method.model';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @UntilDestroy()
 @Component({
@@ -20,15 +22,18 @@ export class CheckoutComponent implements OnInit {
   addressChangedSub: Subscription | undefined = Subscription.EMPTY;
   step: number = 0;
   orderSummary$: Observable<IOrderSummary>;
+  deliveryMethod$: Observable<IDeliveryMethod>;
 
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
     private checkoutService: CheckoutService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toast: HotToastService
   ) {
     this.checkoutForm = this.createCheckoutForm();
     this.orderSummary$ = this.checkoutService.orderSummary$;
+    this.deliveryMethod$ = this.checkoutService.deliveryMethod$;
 
     this.getAddressFormValues();
 
@@ -37,12 +42,41 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.watchAddressFormChanges();
+    this.watchDeliveryFormChanges();
+    this.getDeliveryMethod();
+  }
+
+  private watchAddressFormChanges() {
     this.checkoutForm
       .get('addressForm')
       ?.valueChanges.pipe(debounceTime(500), untilDestroyed(this))
       .subscribe((address: IAddressFormValue) => {
         this.checkoutService.setShippingAddress(address);
       });
+  }
+
+  private watchDeliveryFormChanges() {
+    this.checkoutForm
+      .get('deliveryForm')
+      ?.get('deliveryMethod')
+      ?.valueChanges.pipe(untilDestroyed(this))
+      .subscribe((deliveryMethodId: string) => {
+        this.checkoutService.setShippingMethod(deliveryMethodId);
+      });
+  }
+
+  private getDeliveryMethod() {
+    this.deliveryMethod$
+      .subscribe((deliveryMethod) => {
+        if (deliveryMethod.id) {
+          this.checkoutForm
+            .get('deliveryForm')
+            ?.get('deliveryMethod')
+            ?.patchValue(deliveryMethod.id.toString(), { emitEvent: false });
+        }
+      })
+      .unsubscribe();
   }
 
   private createCheckoutForm() {
@@ -75,5 +109,18 @@ export class CheckoutComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  handleStepSelected(selectedIndex: number) {
+    if (selectedIndex === 10) {
+      this.checkoutService.createPaymentIntent().subscribe(
+        () => {
+          this.toast.success('Payment intent created successfully.');
+        },
+        () => {
+          this.toast.error('Payment intent creation failed');
+        }
+      );
+    }
   }
 }

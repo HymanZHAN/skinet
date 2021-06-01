@@ -59,8 +59,14 @@ export class CheckoutService {
     );
   }
 
-  setShippingMethod(method: IDeliveryMethod) {
-    this.deliveryMethod.next(method);
+  setShippingMethod(methodId: string) {
+    let nextMethod = this.deliveryMethods.value.find((m) => m.id.toString() === methodId);
+    nextMethod = nextMethod || EMPTY_DELIVERY_METHOD;
+    this.deliveryMethod.next(nextMethod);
+
+    const currentBasket = this.basketService.currentBasket;
+    currentBasket.deliveryMethodId = nextMethod.id;
+    this.basketService.setBasket(currentBasket);
   }
 
   clearShippingMethod() {
@@ -69,7 +75,6 @@ export class CheckoutService {
 
   setShippingAddress(address: IAddressFormValue) {
     this.shippingAddress.next(address);
-    console.log(this.shippingAddress.value);
   }
 
   generateOrderToCreate() {
@@ -100,5 +105,9 @@ export class CheckoutService {
     return basket.items.length === 0
       ? 0
       : basket.items.map((item) => item.quantity * item.price).reduce((a, b) => a + b);
+  }
+
+  createPaymentIntent() {
+    return this.basketService.createPaymentIntent();
   }
 }

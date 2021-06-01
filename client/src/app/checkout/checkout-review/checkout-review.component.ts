@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { CdkStepper } from '@angular/cdk/stepper';
+import { Component, Input, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Observable } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasketItem } from 'src/app/shared/models/basket.model';
@@ -9,8 +11,21 @@ import { IBasketItem } from 'src/app/shared/models/basket.model';
   styleUrls: ['./checkout-review.component.scss'],
 })
 export class CheckoutReviewComponent {
+  @Input() stepper!: CdkStepper;
   basketItems$: Observable<IBasketItem[]>;
+
   constructor(private basketService: BasketService) {
     this.basketItems$ = this.basketService.basketItems$;
+  }
+
+  submitPaymentIntent() {
+    this.basketService.createPaymentIntent().subscribe(
+      (resp: any) => {
+        this.stepper.next();
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }

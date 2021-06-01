@@ -1,1 +1,41 @@
-<app-button (click)="submitOrder()">Submit Order</app-button>
+<div [formGroup]="checkoutForm">
+  <div formGroupName="paymentForm" class="mt-4 grid grid-cols-4 gap-4">
+    <fieldset class="col-span-2">
+      <app-text-input formControlName="nameOnCard" [label]="'Name on card'"></app-text-input>
+    </fieldset>
+    <fieldset class="col-start-3 col-span-2 h-48">
+      <legend class="block text-sm font-medium text-gray-700">Card details</legend>
+      <div>
+        <div
+          #cardNumber
+          class="mt-1 px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm"
+        ></div>
+        <div
+          #cardExpiry
+          class="mt-2 px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm"
+        ></div>
+        <div
+          #cardCvc
+          class="mt-2 px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm"
+        ></div>
+        <ng-container *ngIf="cardErrors">
+          <p class="mt-2 text-sm text-red-600">{{ cardErrors }}</p>
+        </ng-container>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<app-button
+  (click)="submitOrder()"
+  [disabled]="
+    loading ||
+    checkoutForm.get('paymentForm')?.invalid ||
+    !cardNumberValid ||
+    !cardExpiryValid ||
+    !cardCvcValid
+  "
+>
+  Submit Order
+  <fa-icon *ngIf="loading" [icon]="spinner" [spin]="true" class="text-white ml-2"></fa-icon>
+</app-button>

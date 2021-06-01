@@ -6,7 +6,6 @@
         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
         <label
           *ngFor="let method of deliveryMethods$ | async; let first = first; let last = last"
-          (click)="setDeliveryMethod(method)"
           class="border-gray-200 relative border p-4 flex flex-col cursor-pointer md:pl-4 md:pr-6 md:grid md:grid-cols-3"
           [ngClass]="{
             'rounded-t-md': first,
@@ -54,4 +53,17 @@
       </div>
     </fieldset>
   </div>
+</div>
+<div class="mt-6 flex justify-between">
+  <button cdkStepperPrevious class="primary">
+    <fa-icon [icon]="faAngleLeft" class="text-white mr-2"></fa-icon>
+    Address
+  </button>
+  <button
+    cdkStepperNext
+    class="primary"
+    [ngClass]="{ disabled: checkoutForm.get('deliveryForm')?.invalid }"
+  >
+    Delivery <fa-icon class="text-white ml-2" [icon]="faAngleRight"></fa-icon>
+  </button>
 </div>

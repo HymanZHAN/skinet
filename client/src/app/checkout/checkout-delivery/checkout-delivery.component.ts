@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IDeliveryMethod } from 'src/app/shared/models/delivery-method.model';
 import { CheckoutService } from '../checkout.service';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-checkout-delivery',
@@ -15,6 +16,9 @@ export class CheckoutDeliveryComponent implements OnInit {
   deliveryMethods$: Observable<IDeliveryMethod[]>;
   selectedDeliveryMethod$: Observable<IDeliveryMethod>;
 
+  faAngleRight = faAngleRight;
+  faAngleLeft = faAngleLeft;
+
   constructor(private checkoutService: CheckoutService) {
     this.deliveryMethods$ = this.checkoutService.deliveryMethods$;
     this.selectedDeliveryMethod$ = this.checkoutService.deliveryMethod$;
@@ -22,16 +26,10 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkoutService.getDeliveryMethods().subscribe(
-      () => {
-        console.log('initialized basket');
-      },
+      () => {},
       (error) => {
         console.error(error);
       }
     );
-  }
-
-  setDeliveryMethod(method: IDeliveryMethod) {
-    this.checkoutService.setShippingMethod(method);
   }
 }

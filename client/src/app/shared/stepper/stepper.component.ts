@@ -1,5 +1,5 @@
-import { CdkStepper } from '@angular/cdk/stepper';
-import { Component, Input, OnInit } from '@angular/core';
+import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-stepper',
@@ -11,13 +11,23 @@ export class StepperComponent extends CdkStepper implements OnInit {
   @Input() linearModeSelected: boolean = false;
   @Input() initialStep = 0;
 
+  @Output() stepSelected = new EventEmitter<number>();
+
   ngOnInit(): void {
     this.linear = this.linearModeSelected;
-    this.goToStep(this.initialStep);
+    this.goToIndex(this.initialStep);
   }
 
-  goToStep(index: number) {
-    this.selectedIndex = index;
-    console.log(this.selectedIndex);
+  goToIndex(i: number) {
+    this.selectedIndex = i;
+    this.stepSelected.emit(i);
+  }
+
+  goToStep(i: number, step: CdkStep) {
+    if (step.completed) {
+      this.selectedIndex = i;
+      this.stepSelected.emit(i);
+      console.log(this.selected);
+    }
   }
 }

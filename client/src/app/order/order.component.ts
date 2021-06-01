@@ -16,13 +16,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.loadOrders().subscribe(
-      () => {
-        console.log('orders loaded');
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    this.orderService.loadOrders();
   }
 }

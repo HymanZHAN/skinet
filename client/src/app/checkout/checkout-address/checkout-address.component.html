@@ -8,8 +8,8 @@
       "
       class="text-xs"
     >
-      Save as default address</app-button
-    >
+      Save as default address
+    </app-button>
   </div>
   <div formGroupName="addressForm" class="flex flex-wrap">
     <div class="pr-4 pt-4 w-1/2">
@@ -31,4 +31,18 @@
       <app-text-input [label]="'Zip Code'" formControlName="zipCode"></app-text-input>
     </div>
   </div>
+</div>
+
+<div class="mt-6 flex justify-between">
+  <app-button routerLink="/basket">
+    <fa-icon [icon]="faAngleLeft" class="text-white mr-2"></fa-icon>
+    Basket
+  </app-button>
+  <button
+    cdkStepperNext
+    class="primary"
+    [ngClass]="{ disabled: checkoutForm.get('addressForm')?.invalid }"
+  >
+    Delivery <fa-icon class="text-white ml-2" [icon]="faAngleRight"></fa-icon>
+  </button>
 </div>

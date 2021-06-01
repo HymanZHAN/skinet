@@ -1,6 +1,11 @@
 <div class="grid grid-cols-3 grid-rows-2">
   <div class="col-span-2 pr-8">
-    <app-stepper [linearModeSelected]="false" [initialStep]="step" #appStepper>
+    <app-stepper
+      [linearModeSelected]="true"
+      [initialStep]="step"
+      (stepSelected)="handleStepSelected($event)"
+      #appStepper
+    >
       <cdk-step [label]="'Address'" [completed]="checkoutForm.get('addressForm')?.valid">
         <app-checkout-address [checkoutForm]="checkoutForm"></app-checkout-address>
       </cdk-step>
@@ -8,7 +13,7 @@
         <app-checkout-delivery [checkoutForm]="checkoutForm"></app-checkout-delivery>
       </cdk-step>
       <cdk-step [label]="'Review'">
-        <app-checkout-review></app-checkout-review>
+        <app-checkout-review [stepper]="appStepper"></app-checkout-review>
       </cdk-step>
       <cdk-step [label]="'Payment'">
         <app-checkout-payment [checkoutForm]="checkoutForm"></app-checkout-payment>

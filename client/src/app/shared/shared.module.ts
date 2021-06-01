@@ -46,6 +46,7 @@ import { BasketSummaryComponent } from './basket-summary/basket-summary.componen
     CdkStepperModule,
     ButtonComponent,
     BasketSummaryComponent,
+    FontAwesomeModule,
   ],
 })
 export class SharedModule {}

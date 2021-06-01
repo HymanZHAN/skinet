@@ -38,7 +38,6 @@ export class NavbarComponent {
   }
 
   logout() {
-    console.log('logging out');
     this.isProfileDropdownOpen = false;
     this.accountService.logout();
     this.toast.success('You are now logged out.');

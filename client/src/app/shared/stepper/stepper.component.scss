@@ -30,7 +30,7 @@ li.step-element {
     }
 
     &.upcoming {
-      @apply border-gray-200 hover:border-gray-300;
+      @apply border-gray-200;
 
       span {
         &.step-label {

@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, forkJoin } from 'rxjs';
-import { map, mergeAll } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { CheckoutService } from '../checkout/checkout.service';
 import { Basket, IBasket, IBasketItem } from '../shared/models/basket.model';
-import { EMPTY_DELIVERY_METHOD, IDeliveryMethod } from '../shared/models/delivery-method.model';
-import { IOrderSummary } from '../shared/models/order.model';
 import { IProduct } from '../shared/models/product.model';
 
 @Injectable({
@@ -21,6 +18,14 @@ export class BasketService {
   basketItemCount$ = this.basket$.pipe(map((basket) => this.calculateBasketItemCount(basket)));
 
   constructor(private http: HttpClient) {}
+
+  createPaymentIntent() {
+    return this.http.post<IBasket>(`${this.baseUrl}/payments/${this.currentBasket.id}`, {}).pipe(
+      map((basket) => {
+        this.basketSource.next(basket);
+      })
+    );
+  }
 
   calculateBasketItemCount(basket: IBasket) {
     return basket.items.length === 0

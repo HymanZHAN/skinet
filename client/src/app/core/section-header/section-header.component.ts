@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { defaultIfEmpty, map } from 'rxjs/operators';
-import { BreadcrumbDefinition, BreadcrumbService } from 'xng-breadcrumb';
+import { map } from 'rxjs/operators';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-section-header',

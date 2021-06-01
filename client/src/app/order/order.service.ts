@@ -26,7 +26,13 @@ export class OrderService {
   loadOrders() {
     return this.http
       .get<IOrder[]>(`${this.baseUrl}/orders`)
-      .pipe(map((orders) => this.orders.next(orders)));
+      .pipe(map((orders) => this.orders.next(orders)))
+      .subscribe(
+        () => {},
+        (err) => {
+          console.error(err);
+        }
+      );
   }
 
   loadOrderById(orderId: number) {
