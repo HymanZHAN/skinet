@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-// import { registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,16 +11,14 @@ import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+
+// TODO: I18N
+// import { registerLocaleData } from '@angular/common';
 // import { NZ_I18N } from 'ng-zorro-antd/i18n';
 // import { en_US } from 'ng-zorro-antd/i18n';
 // import en from '@angular/common/locales/en';
-import { BasketModule } from './basket/basket.module';
-import { CheckoutModule } from './checkout/checkout.module';
-import { AccountModule } from './account/account.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
-import { OrderModule } from './order/order.module';
-
 // registerLocaleData(en);
 
 @NgModule({
@@ -35,11 +32,7 @@ import { OrderModule } from './order/order.module';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    BasketModule,
-    CheckoutModule,
-    AccountModule,
     FontAwesomeModule,
-    OrderModule,
   ],
   providers: [
     {

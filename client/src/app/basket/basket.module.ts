@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [BasketComponent],
-  imports: [CommonModule, SharedModule, BasketRoutingModule],
-  exports: [BasketComponent],
+  imports: [CommonModule, BasketRoutingModule, SharedModule],
 })
 export class BasketModule {}
