@@ -5,20 +5,26 @@ import { IProductSort } from '../shared/models/product-sort.model';
 import { IProduct } from '../shared/models/product.model';
 import { ShopService } from './shop.service';
 import { ProductParams } from '../shared/models/product-params.model';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopComponent implements OnInit {
-  products: IProduct[] = [];
-  totalProductCount = 0;
-  shownProductCount = 0;
+  products$: Observable<IProduct[]>;
+  productParams$: Observable<ProductParams>;
+  totalProductCount$: Observable<number>;
+  vm$: Observable<{
+    products: IProduct[];
+    productParams: ProductParams;
+    totalProductCount: number;
+  }>;
 
-  productParams = new ProductParams();
-
+  searchTerm: string = '';
   brands: IProductBrand[] = [];
   types: IProductType[] = [];
   sortOptions: IProductSort[] = [
@@ -27,28 +33,23 @@ export class ShopComponent implements OnInit {
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
 
-  constructor(private shopService: ShopService, private ref: ChangeDetectorRef) {}
+  constructor(private shopService: ShopService, private ref: ChangeDetectorRef) {
+    this.products$ = this.shopService.products$;
+    this.productParams$ = this.shopService.productParams$;
+    this.totalProductCount$ = this.shopService.totalProductCount$;
+    this.vm$ = combineLatest([this.products$, this.productParams$, this.totalProductCount$]).pipe(
+      map((obs) => {
+        return { products: obs[0], productParams: obs[1], totalProductCount: obs[2] };
+      })
+    );
 
-  ngOnInit(): void {
-    this.getProducts();
-    this.getBrands();
-    this.getTypes();
+    this.brands = this.shopService.brands;
+    this.types = this.shopService.types;
   }
 
-  private getProducts() {
-    this.shopService.getProducts(this.productParams).subscribe(
-      (resp) => {
-        this.products = resp.data;
-        this.shownProductCount = resp.count <= resp.pageSize ? resp.count : resp.pageSize;
-        this.totalProductCount = resp.count;
-        this.productParams.pageIndex = resp.pageIndex;
-        this.productParams.pageSize = resp.pageSize;
-        this.ref.markForCheck();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  ngOnInit(): void {
+    this.getBrands();
+    this.getTypes();
   }
 
   private getBrands() {
@@ -76,40 +77,35 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    this.productParams.brandId = brandId;
-    this.productParams.pageIndex = 1;
-    this.getProducts();
+    this.shopService.updateProductParams({ brandId, pageIndex: 1 });
   }
 
   onTypeSelected(typeId: number) {
-    this.productParams.typeId = typeId;
-    this.productParams.pageIndex = 1;
-    this.getProducts();
+    this.shopService.updateProductParams({ typeId });
   }
 
   onSortSelected(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.productParams.sort = target.value;
-    this.getProducts();
+    this.shopService.updateProductParams({ sort: target.value });
   }
 
-  onPageChanged(newPageIndex: number) {
-    this.productParams.pageIndex = newPageIndex;
-    this.getProducts();
+  onPageChanged(pageIndex: number) {
+    this.shopService.updateProductParams({ pageIndex });
   }
 
   onSearch() {
-    this.getProducts();
+    this.shopService.updateProductParams({ search: this.searchTerm, pageIndex: 1 });
   }
 
   onReset() {
-    this.productParams.search = '';
-    this.getProducts();
+    this.searchTerm = '';
+    this.shopService.updateProductParams({ search: '' });
   }
 
-  onSearchBoxFocusOut() {
-    if (!this.productParams.search) {
-      this.getProducts();
+  onSearchBoxBlur(event: Event) {
+    const searchBox = event.target as HTMLInputElement;
+    if (!searchBox.value) {
+      this.shopService.updateProductParams({ search: '', pageIndex: 1 });
     }
   }
 
