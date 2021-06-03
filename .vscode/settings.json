@@ -8,7 +8,12 @@
     // "**/bin": true,
     "**/obj": true
   },
-  "cSpell.words": ["Npgsql", "skinet"],
+  "cSpell.words": [
+    "Npgsql",
+    "appuser",
+    "skinet",
+    "whsec"
+  ],
   "deploy.reloaded": {
     "values": {
       "sshDir": {
