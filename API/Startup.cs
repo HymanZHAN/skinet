@@ -29,13 +29,8 @@ namespace API
         {
             services.AddControllers();
             services.AddSwaggerDocumentation();
-            services.AddDbContext<StoreContext>(
-                x => x.UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
-            );
-            services.AddDbContext<AppIdentityDbContext>(x =>
-            {
-                x.UseSqlite(_configuration.GetConnectionString("IdentityConnection"));
-            });
+            services.AddDbContext<StoreContext>(x => x.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppIdentityDbContext>(x => x.UseNpgsql(_configuration.GetConnectionString("IdentityConnection")));
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
                 var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"),
