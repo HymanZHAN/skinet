@@ -60,6 +60,6 @@ export class PaginationComponent {
     this.pages = new Array(pageCount).fill(null).map((_, i) => i + 1);
     this.pageCount = this.pages.length;
     this.isOnFirstPage = this.pageIndex === 1;
-    this.isOnLastPage = this.pageIndex === this.pageCount;
+    this.isOnLastPage = this.pageIndex === this.pageCount || this.pageCount === 0;
   }
 }
