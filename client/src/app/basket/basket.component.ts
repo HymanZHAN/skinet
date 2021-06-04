@@ -19,6 +19,10 @@ export class BasketComponent {
     this.basketCount$ = this.basketService.basketItemCount$;
     this.basketItems$ = this.basketService.basketItems$;
     this.orderSummary$ = this.checkoutService.orderSummary$;
+
+    this.loadExternalScripts('https://js.stripe.com/v3/')
+      .then(() => {})
+      .catch(() => {});
   }
 
   incrementItemCount(item: IBasketItem) {
@@ -31,5 +35,14 @@ export class BasketComponent {
 
   removeItem(item: IBasketItem) {
     this.basketService.removeBasketItem(item);
+  }
+
+  private loadExternalScripts(scriptUrl: string) {
+    return new Promise((resolve) => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = scriptUrl;
+      scriptElement.onload = resolve;
+      document.body.appendChild(scriptElement);
+    });
   }
 }

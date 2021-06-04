@@ -8,12 +8,7 @@
     // "**/bin": true,
     "**/obj": true
   },
-  "cSpell.words": [
-    "Npgsql",
-    "appuser",
-    "skinet",
-    "whsec"
-  ],
+  "cSpell.words": ["Npgsql", "appuser", "skinet", "whsec"],
   "deploy.reloaded": {
     "values": {
       "sshDir": {
@@ -24,16 +19,21 @@
 
     "packages": [
       {
-        "name": "Version 1.0.0",
-        "description": "Package version 1.0.0",
+        "name": "Full App",
+        "description": "Fullstack deployment",
         "files": ["publish/**"]
+      },
+      {
+        "name": "Client",
+        "description": "Frontend-only deployment",
+        "files": ["publish/wwwroot/**"]
       }
     ],
 
     "targets": [
       {
         "type": "sftp",
-        "name": "Linux",
+        "name": "Linux - Fullstack",
         "description": "SFTP folder",
 
         "host": "167.172.252.152",
@@ -44,6 +44,21 @@
         "dir": "/var/www/skinet",
         "mappings": {
           "publish/**": "/"
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "Linux - Client",
+        "description": "SFTP client folder",
+
+        "host": "167.172.252.152",
+        "port": 22,
+        "user": "root",
+        "privateKey": "${sshDir}",
+
+        "dir": "/var/www/skinet/wwwroot",
+        "mappings": {
+          "publish/wwwroot/**": "/"
         }
       }
     ]
