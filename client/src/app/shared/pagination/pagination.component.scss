@@ -6,3 +6,7 @@
   @apply text-gray-400 cursor-default hover:bg-white;
   pointer-events: none;
 }
+
+:host {
+  display: block;
+}

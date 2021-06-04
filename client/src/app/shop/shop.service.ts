@@ -40,8 +40,10 @@ export class ShopService {
     })
   );
 
-  brands: IProductBrand[] = [];
-  types: IProductType[] = [];
+  private brands = new BehaviorSubject<IProductBrand[]>([]);
+  brands$ = this.brands.asObservable();
+  private types = new BehaviorSubject<IProductType[]>([]);
+  types$ = this.types.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -81,25 +83,18 @@ export class ShopService {
   }
 
   getBrands() {
-    if (this.brands.length > 0) {
-      return of(this.brands);
-    }
     return this.http
       .get<IProductBrand[]>(`${this.baseUrl}/products/brands`)
-      .pipe(map((brands) => (this.brands = brands)));
+      .pipe(map((resp) => this.brands.next([{ id: 0, name: 'All' }, ...resp])));
   }
 
   getTypes() {
-    if (this.types.length > 0) {
-      return of(this.types);
-    }
     return this.http
       .get<IProductType[]>(`${this.baseUrl}/products/types`)
-      .pipe(map((types) => (this.types = types)));
+      .pipe(map((resp) => this.types.next([{ id: 0, name: 'All' }, ...resp])));
   }
 
   updateProductParams(paramUpdates: Partial<ProductParams>) {
-    console.log('updateProductParams');
     const newParams = { ...this.productParams.value, ...paramUpdates };
     this.productParams.next(newParams);
   }

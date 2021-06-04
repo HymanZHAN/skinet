@@ -12,9 +12,11 @@ import { map } from 'rxjs/operators';
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopComponent implements OnInit {
+  brands$: Observable<IProductBrand[]>;
+  types$: Observable<IProductType[]>;
   products$: Observable<IProduct[]>;
   productParams$: Observable<ProductParams>;
   totalProductCount$: Observable<number>;
@@ -24,56 +26,30 @@ export class ShopComponent implements OnInit {
     totalProductCount: number;
   }>;
 
-  searchTerm: string = '';
-  brands: IProductBrand[] = [];
-  types: IProductType[] = [];
+  searchTerm$: Observable<string>;
   sortOptions: IProductSort[] = [
     { name: 'Name: A to Z', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
 
-  constructor(private shopService: ShopService, private ref: ChangeDetectorRef) {
+  constructor(private shopService: ShopService) {
+    this.brands$ = this.shopService.brands$;
+    this.types$ = this.shopService.types$;
     this.products$ = this.shopService.products$;
     this.productParams$ = this.shopService.productParams$;
+    this.searchTerm$ = this.productParams$.pipe(map((params) => params.search));
     this.totalProductCount$ = this.shopService.totalProductCount$;
     this.vm$ = combineLatest([this.products$, this.productParams$, this.totalProductCount$]).pipe(
       map((obs) => {
         return { products: obs[0], productParams: obs[1], totalProductCount: obs[2] };
       })
     );
-
-    this.brands = this.shopService.brands;
-    this.types = this.shopService.types;
   }
 
   ngOnInit(): void {
-    this.getBrands();
-    this.getTypes();
-  }
-
-  private getBrands() {
-    this.shopService.getBrands().subscribe(
-      (resp) => {
-        this.brands = [{ id: 0, name: 'All' }, ...resp];
-        this.ref.markForCheck();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  private getTypes() {
-    this.shopService.getTypes().subscribe(
-      (resp) => {
-        this.types = [{ id: 0, name: 'All' }, ...resp];
-        this.ref.markForCheck();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    this.shopService.getBrands().subscribe();
+    this.shopService.getTypes().subscribe();
   }
 
   onBrandSelected(brandId: number) {
@@ -93,12 +69,12 @@ export class ShopComponent implements OnInit {
     this.shopService.updateProductParams({ pageIndex });
   }
 
-  onSearch() {
-    this.shopService.updateProductParams({ search: this.searchTerm, pageIndex: 1 });
+  onSearch(event: Event) {
+    const searchBox = event.target as HTMLInputElement;
+    this.shopService.updateProductParams({ search: searchBox.value, pageIndex: 1 });
   }
 
   onReset() {
-    this.searchTerm = '';
     this.shopService.updateProductParams({ search: '' });
   }
 
