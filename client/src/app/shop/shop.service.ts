@@ -77,9 +77,12 @@ export class ShopService {
     const cachedResponse = this.products.get(this.cacheKey);
     if (cachedResponse) {
       const product = cachedResponse.data.find((p) => p.id === id);
-      return product ? of(product) : this.http.get<IProduct>(`${this.baseUrl}/products/${id}`);
+      if (product) {
+        return of(product);
+      }
     }
-    return of(EMPTY_PRODUCT);
+    // return of(EMPTY_PRODUCT);
+    return this.http.get<IProduct>(`${this.baseUrl}/products/${id}`);
   }
 
   getBrands() {
