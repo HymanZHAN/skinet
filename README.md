@@ -56,3 +56,4 @@ You should be able to visit [`https://localhost:4200/`](https://localhost:4200)
 - [ ] An inventory system with an admin panel
 - [ ] Product review system
 - [ ] Be able to favorite product
+- [ ] Rebuild the client with Vue/Svelte and compare different solutions
