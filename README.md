@@ -52,6 +52,8 @@ You should be able to visit [`https://localhost:4200/`](https://localhost:4200)
 
 ## Further enhancement ideas:
 
+- [ ] Minify media assets; Use `webp` for images
+- [ ] Redesign `Home` page with static template (instead of a carousel)
 - [ ] Add tests
 - [ ] An inventory system with an admin panel
 - [ ] Product review system
