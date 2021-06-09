@@ -52,10 +52,11 @@ You should be able to visit [`https://localhost:4200/`](https://localhost:4200)
 
 ## Further enhancement ideas:
 
-- [ ] Minify media assets; Use `webp` for images
-- [ ] Redesign `Home` page with static template (instead of a carousel)
+- [x] Minify media assets; Use `webp` for images
+- [x] Redesign `Home` page with static template (instead of a carousel)
+  - [ ] SSR/SSG the site or just the homepage
 - [ ] Add tests
 - [ ] An inventory system with an admin panel
-- [ ] Product review system
-- [ ] Be able to favorite product
+- [ ] A product review system
+- [ ] The ability to favorite/bookmark products
 - [ ] Rebuild the client with Vue/Svelte and compare different solutions

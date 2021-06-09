@@ -50,7 +50,11 @@
                         class="flex-shrink-0 h-12 w-12 cursor-pointer"
                         routerLink="/shop/{{ item.id }}"
                       >
-                        <img class="h-12 w-12" src="{{ item.pictureUrl }}" alt="" />
+                        <picture class="h-12 w-12">
+                          <source srcset="{{ item.pictureUrl }}.webp" type="image/webp" />
+                          <source srcset="{{ item.pictureUrl }}.png" type="image/png" />
+                          <img src="{{ item.pictureUrl }}.png" alt="{{ item.productName }}" />
+                        </picture>
                       </div>
                       <div class="ml-4">
                         {{ item.productName }}

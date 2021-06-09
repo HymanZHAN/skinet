@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
-import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CdkStepperModule } from '@angular/cdk/stepper';
@@ -26,18 +25,10 @@ import { BasketSummaryComponent } from './basket-summary/basket-summary.componen
     ButtonComponent,
     BasketSummaryComponent,
   ],
-  imports: [
-    CommonModule,
-    NzCarouselModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FontAwesomeModule,
-    CdkStepperModule,
-  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FontAwesomeModule, CdkStepperModule],
   exports: [
     PaginationComponent,
     PaginationHeaderComponent,
-    NzCarouselModule,
     OrderTotalsComponent,
     QuantityCountComponent,
     ReactiveFormsModule,

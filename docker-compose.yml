@@ -1,14 +1,16 @@
 services:
   redis:
     image: redis:latest
+    restart: always
     ports:
-      - 6379:6379
+      - 63791:6379
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis-data:/data
 
   redis-commander:
     image: rediscommander/redis-commander:latest
+    restart: always
     environment:
       - REDIS_HOSTS=local:redis:6379
       - HTTP_USER=root
@@ -27,11 +29,11 @@ services:
     ports:
       - 54321:5432
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
 
 volumes:
   redis-data:

@@ -1,6 +1,5 @@
 import { CdkStepper } from '@angular/cdk/stepper';
-import { Component, Input, OnInit } from '@angular/core';
-import { HotToastService } from '@ngneat/hot-toast';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasketItem } from 'src/app/shared/models/basket.model';
