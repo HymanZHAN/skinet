@@ -53,8 +53,12 @@ You should be able to visit [`https://localhost:4200/`](https://localhost:4200)
 ## Further enhancement ideas:
 
 - [x] Minify media assets; Use `webp` for images
-- [x] Redesign `Home` page with static template (instead of a carousel)
-  - [ ] SSR/SSG the site or just the homepage
+- [x] Redesign `Home` page with static template (instead of a carousel) and improve load time. (Lighthouse score > 90)
+  - [ ] ~~SSR/SSG the site or just the homepage~~
+        Attempted. Have a few problems:
+    - Not all routes can be pre-rendered cleanly
+    - If only the homepage is pre-rendered, when reloading other pages the pre-rendered homepage will appear first and quickly get replaced.
+  - [x] Pre-load hero image.
 - [ ] Add tests
 - [ ] An inventory system with an admin panel
 - [ ] A product review system
